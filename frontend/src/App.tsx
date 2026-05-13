@@ -5,7 +5,7 @@ import "./index.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Image-catalog">
       <div className="min-h-screen bg-gray-50">
         {/* Navigation Header */}
         <nav className="bg-white shadow-md border-b border-gray-200">

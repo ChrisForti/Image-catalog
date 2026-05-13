@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Upload, X } from "lucide-react";
 import { uploadImage } from "../api";
 import type { NewTechnique, NewGalleryItem } from "../types";
+import { getImageUrl } from "../utils/url";
 
 interface TechnicalSOPFormProps {
   onSubmit: (data: NewTechnique) => Promise<void>;
@@ -276,7 +277,7 @@ export const TechnicalSOPForm: React.FC<TechnicalSOPFormProps> = ({
           {formData.imageUrl ? (
             <div className="relative">
               <img
-                src={formData.imageUrl}
+                src={getImageUrl(formData.imageUrl)}
                 alt="Preview"
                 className="w-48 h-48 object-cover rounded-lg"
               />

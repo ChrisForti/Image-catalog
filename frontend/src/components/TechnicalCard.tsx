@@ -2,6 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { MapPin, Package, Wrench, FileText, Calendar } from "lucide-react";
 import type { Technique } from "../types";
+import { getImageUrl } from "../utils/url";
 
 interface TechnicalCardProps {
   technique: Technique;
@@ -21,7 +22,7 @@ export const TechnicalCard: React.FC<TechnicalCardProps> = ({
       {technique.imageUrl && (
         <div className="h-64 overflow-hidden bg-gray-100">
           <img
-            src={technique.imageUrl}
+            src={getImageUrl(technique.imageUrl)}
             alt={technique.title}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />
@@ -160,7 +161,7 @@ export const TechnicalCardDetail: React.FC<TechnicalCardDetailProps> = ({
         <div className="relative">
           {technique.imageUrl && (
             <img
-              src={technique.imageUrl}
+              src={getImageUrl(technique.imageUrl)}
               alt={technique.title}
               className="w-full h-96 object-cover"
             />

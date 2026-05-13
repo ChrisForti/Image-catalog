@@ -1,5 +1,6 @@
 import React from "react";
 import type { GalleryItem } from "../types";
+import { getImageUrl } from "../utils/url";
 
 interface GalleryCardProps {
   item: GalleryItem;
@@ -14,7 +15,7 @@ export const GalleryCard: React.FC<GalleryCardProps> = ({ item, onClick }) => {
     >
       <div className="h-64 overflow-hidden bg-gray-100">
         <img
-          src={item.imageUrl}
+          src={getImageUrl(item.imageUrl)}
           alt={item.title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
