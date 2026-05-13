@@ -1,0 +1,23 @@
+{
+  "name": "nautical-carpentry-monorepo",
+  "version": "1.0.0",
+  "description": "Nautical Carpentry Knowledge Base - Backend + Frontend",
+  "private": true,
+  "scripts": {
+    "setup": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "db:generate": "cd backend && npm run db:generate",
+    "db:studio": "cd backend && npm run db:studio"
+  },
+  "keywords": [
+    "carpentry",
+    "sop",
+    "documentation",
+    "marine"
+  ],
+  "author": "",
+  "license": "MIT"
+}
