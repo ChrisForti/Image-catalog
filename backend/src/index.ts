@@ -114,9 +114,13 @@ app.get("/api/techniques", async (req: Request, res: Response) => {
       conditions.push(like(techniques.hardwareName, `%${hardware}%`));
     }
 
-    const results = conditions.length > 0
-      ? await db.select().from(techniques).where(and(...conditions))
-      : await db.select().from(techniques);
+    const results =
+      conditions.length > 0
+        ? await db
+            .select()
+            .from(techniques)
+            .where(and(...conditions))
+        : await db.select().from(techniques);
 
     res.json(results);
   } catch (error) {
@@ -234,9 +238,13 @@ app.get("/api/gallery", async (req: Request, res: Response) => {
       conditions.push(like(galleryItems.category, `%${category}%`));
     }
 
-    const results = conditions.length > 0
-      ? await db.select().from(galleryItems).where(and(...conditions))
-      : await db.select().from(galleryItems);
+    const results =
+      conditions.length > 0
+        ? await db
+            .select()
+            .from(galleryItems)
+            .where(and(...conditions))
+        : await db.select().from(galleryItems);
 
     res.json(results);
   } catch (error) {
