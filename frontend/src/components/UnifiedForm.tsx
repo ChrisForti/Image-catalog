@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Plus } from "lucide-react";
 import { TechnicalSOPForm, GalleryForm } from "../components/Forms";
 import type { NewTechnique, NewGalleryItem } from "../types";
 

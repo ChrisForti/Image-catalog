@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Anchor } from "lucide-react";
 import { HomePage } from "./pages/HomePage";
