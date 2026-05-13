@@ -1,6 +1,7 @@
 # Quick Deploy Guide for Image-catalog
 
 ## Your Setup
+
 - **GitHub Repo**: `ChrisForti/Image-catalog`
 - **GitHub Pages URL**: `https://chrisforti.github.io/Image-catalog`
 - **Base Path**: `/Image-catalog` (required for project site)
@@ -29,11 +30,13 @@ git push -u origin main
 5. Railway will detect the Node.js backend
 
 ### Add PostgreSQL Database
+
 1. In the Railway project, click **"+ New"**
 2. Select **"Database"** → **"PostgreSQL"**
 3. Wait ~30 seconds for provisioning
 
 ### Configure Backend Environment Variables
+
 Click on your backend service → **"Variables"** tab:
 
 ```bash
@@ -44,6 +47,7 @@ CORS_ORIGIN=https://chrisforti.github.io
 ```
 
 ### Generate Public Domain
+
 1. Click on backend service → **"Settings"**
 2. Go to **"Networking"** section
 3. Click **"Generate Domain"**
@@ -53,19 +57,23 @@ CORS_ORIGIN=https://chrisforti.github.io
 ## Step 3: Configure GitHub Pages
 
 ### Enable GitHub Pages
+
 1. Go to `https://github.com/ChrisForti/Image-catalog/settings/pages`
 2. Under **"Build and deployment"**:
    - Source: **GitHub Actions**
 
 ### Add Repository Secrets
+
 1. Go to `https://github.com/ChrisForti/Image-catalog/settings/secrets/actions`
 2. Click **"New repository secret"** and add:
 
 **Secret 1:**
+
 - Name: `VITE_API_URL`
 - Value: `https://your-backend.up.railway.app` (from Step 2)
 
 **Secret 2:**
+
 - Name: `VITE_BASE_PATH`
 - Value: `/Image-catalog`
 
@@ -79,6 +87,7 @@ git push
 ```
 
 The GitHub Action will:
+
 1. Build your frontend
 2. Deploy to GitHub Pages
 3. Available at: **https://chrisforti.github.io/Image-catalog**
@@ -101,6 +110,7 @@ Once you have your GitHub Pages URL, update Railway:
 Visit: **https://chrisforti.github.io/Image-catalog**
 
 Test:
+
 - ✅ Create a Technical SOP entry
 - ✅ Upload an image
 - ✅ Create a Gallery item
@@ -109,6 +119,7 @@ Test:
 ## Local Development
 
 Create `backend/.env`:
+
 ```bash
 NODE_ENV=development
 PORT=3001
@@ -116,11 +127,13 @@ DATABASE_URL=postgresql://nautical_user:nautical_pass@localhost:5432/nautical_ca
 ```
 
 Create `frontend/.env.local`:
+
 ```bash
 VITE_API_URL=http://localhost:3001
 ```
 
 Run locally:
+
 ```bash
 # Terminal 1: Backend
 cd backend
@@ -144,21 +157,25 @@ Visit: http://localhost:3000
 ## Troubleshooting
 
 ### Frontend shows blank page
+
 - Check browser console (F12)
 - Verify `VITE_BASE_PATH=/Image-catalog` is set in GitHub secrets
 - Check Actions tab for build errors
 
 ### API calls fail
+
 - Verify `VITE_API_URL` in GitHub secrets matches Railway domain
 - Check Railway logs for backend errors
 - Verify `CORS_ORIGIN` in Railway includes full GitHub Pages URL
 
 ### Database connection error
+
 - Ensure `DATABASE_URL=${{Postgres.DATABASE_URL}}` is set
 - Check PostgreSQL service is running in Railway
 - View backend logs for connection details
 
 ### Railway deployment fails
+
 - Check that `railway.toml` and `nixpacks.toml` are in repo root
 - Verify `backend/package.json` exists
 - Check Railway build logs for specific errors

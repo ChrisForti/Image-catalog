@@ -1,6 +1,7 @@
 # Quick Start: Railway Deployment
 
 ## Step 1: Push to GitHub
+
 ```bash
 git init
 git add .
@@ -82,6 +83,7 @@ git push -u origin main
 ## Step 5: Test Your Application
 
 Visit your Vercel URL and test:
+
 - ✅ Create a Technical SOP entry
 - ✅ Upload an image
 - ✅ Create a Gallery item
@@ -91,10 +93,12 @@ Visit your Vercel URL and test:
 ## Costs
 
 **Railway:**
+
 - Hobby Plan: $5/month (500 hours execution)
 - Includes PostgreSQL database
 
 **Vercel:**
+
 - Free tier (perfect for this app)
 - 100GB bandwidth/month
 - Unlimited deployments
@@ -104,6 +108,7 @@ Visit your Vercel URL and test:
 ## Troubleshooting
 
 ### Backend Won't Start
+
 ```bash
 # Check logs in Railway dashboard
 # Common issues:
@@ -113,6 +118,7 @@ Visit your Vercel URL and test:
 ```
 
 ### Frontend Can't Connect
+
 ```bash
 # Verify VITE_API_URL is correct
 # Check browser console for CORS errors
@@ -120,6 +126,7 @@ Visit your Vercel URL and test:
 ```
 
 ### Database Migrations Failed
+
 ```bash
 # View deployment logs in Railway
 # Migrations run automatically with: npm run db:migrate

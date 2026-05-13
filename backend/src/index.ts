@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
+// Load environment variables FIRST before other imports
+dotenv.config();
+
 import express, { Request, Response } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import path from "path";
 import multer from "multer";
 import { z } from "zod";
@@ -8,17 +11,15 @@ import { db } from "./db";
 import { techniques, galleryItems } from "./db/schema";
 import { eq, like, and, or } from "drizzle-orm";
 
-dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 const UPLOAD_DIR = process.env.UPLOAD_DIR || "./uploads";
 
 // CORS configuration for production
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: process.env.CORS_ORIGIN || "*",
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 
 // Middleware
@@ -89,37 +90,34 @@ app.get("/api/techniques", async (req: Request, res: Response) => {
   try {
     const { search, material, location, hardware } = req.query;
 
-    let query = db.select().from(techniques);
+    const conditions = [];
 
-    if (search || material || location || hardware) {
-      const conditions = [];
-
-      if (search) {
-        conditions.push(
-          or(
-            like(techniques.title, `%${search}%`),
-            like(techniques.description, `%${search}%`),
-            like(techniques.techniqueDetails, `%${search}%`),
-          ),
-        );
-      }
-
-      if (material) {
-        conditions.push(like(techniques.material, `%${material}%`));
-      }
-
-      if (location) {
-        conditions.push(like(techniques.locationContext, `%${location}%`));
-      }
-
-      if (hardware) {
-        conditions.push(like(techniques.hardwareName, `%${hardware}%`));
-      }
-
-      query = query.where(and(...conditions.filter(Boolean)));
+    if (search) {
+      conditions.push(
+        or(
+          like(techniques.title, `%${search}%`),
+          like(techniques.description, `%${search}%`),
+          like(techniques.techniqueDetails, `%${search}%`),
+        ),
+      );
     }
 
-    const results = await query;
+    if (material) {
+      conditions.push(like(techniques.material, `%${material}%`));
+    }
+
+    if (location) {
+      conditions.push(like(techniques.locationContext, `%${location}%`));
+    }
+
+    if (hardware) {
+      conditions.push(like(techniques.hardwareName, `%${hardware}%`));
+    }
+
+    const results = conditions.length > 0
+      ? await db.select().from(techniques).where(and(...conditions))
+      : await db.select().from(techniques);
+
     res.json(results);
   } catch (error) {
     console.error("Error fetching techniques:", error);
@@ -221,28 +219,25 @@ app.get("/api/gallery", async (req: Request, res: Response) => {
   try {
     const { search, category } = req.query;
 
-    let query = db.select().from(galleryItems);
+    const conditions = [];
 
-    if (search || category) {
-      const conditions = [];
-
-      if (search) {
-        conditions.push(
-          or(
-            like(galleryItems.title, `%${search}%`),
-            like(galleryItems.description, `%${search}%`),
-          ),
-        );
-      }
-
-      if (category) {
-        conditions.push(like(galleryItems.category, `%${category}%`));
-      }
-
-      query = query.where(and(...conditions.filter(Boolean)));
+    if (search) {
+      conditions.push(
+        or(
+          like(galleryItems.title, `%${search}%`),
+          like(galleryItems.description, `%${search}%`),
+        ),
+      );
     }
 
-    const results = await query;
+    if (category) {
+      conditions.push(like(galleryItems.category, `%${category}%`));
+    }
+
+    const results = conditions.length > 0
+      ? await db.select().from(galleryItems).where(and(...conditions))
+      : await db.select().from(galleryItems);
+
     res.json(results);
   } catch (error) {
     console.error("Error fetching gallery items:", error);
