@@ -463,7 +463,7 @@ export const GalleryForm: React.FC<GalleryFormProps> = ({
           {formData.imageUrl ? (
             <div className="relative">
               <img
-                src={formData.imageUrl}
+                src={getImageUrl(formData.imageUrl)}
                 alt="Preview"
                 className="w-48 h-48 object-cover rounded-lg"
               />
