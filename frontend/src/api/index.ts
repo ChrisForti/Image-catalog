@@ -8,7 +8,7 @@ import type {
 } from "../types";
 
 // Use VITE_API_URL for production (full Railway URL), fallback to /api for dev
-const API_BASE_URL = import.meta.env.VITE_API_URL 
+const API_BASE_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api`
   : "/api";
 
